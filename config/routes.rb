@@ -1,5 +1,7 @@
 Gallerybook::Application.routes.draw do
 
+  resources :friendships
+
   # get "users/index"
   # get "users/show"
 

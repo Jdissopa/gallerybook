@@ -1,2 +1,18 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<p>Username: <%=h current_user.username %></p>
+
+<h2>Friends</h2>
+<ul>
+	<% @user.friendships.each do |friendship| %>
+		<li>
+			<%=h friendship.friend.username %>
+			<%= link_to "remove", friendship, :method => :delete %>
+		</li>
+	<% end %>
+</ul>
+
+<h2>Added by Users</h2>
+<ul>
+	<% @user.inverse_friends.each do |user| %>
+		<li><%=h user.username %></li>
+	<% end %>
+</ul>

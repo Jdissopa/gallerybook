@@ -28,10 +28,10 @@ class FriendshipsController < ApplicationController
 
     respond_to do |format|
       if @friendship.save
-        format.html { redirect_to root_url, notice: 'Friend added.' }
+        format.html { redirect_to users_url, notice: 'Friend added.' }
       
       else
-        format.html { redirect_to root_url, error: 'Unable to add friend.' }
+        format.html { redirect_to users_url, error: 'Unable to add friend.' }
       end
     end
   end
@@ -53,9 +53,10 @@ class FriendshipsController < ApplicationController
   # DELETE /friendships/1
   # DELETE /friendships/1.json
   def destroy
+    @friendship = current_user.friendships.find(params[:id])
     @friendship.destroy
     respond_to do |format|
-      format.html { redirect_to friendships_url }
+      format.html { redirect_to user_path(:id => current_user), notice: 'Friend removed' }
       format.json { head :no_content }
     end
   end

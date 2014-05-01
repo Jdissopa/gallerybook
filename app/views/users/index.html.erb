@@ -5,7 +5,15 @@
 		<div class="user">
 			<p>
 				<strong><%=h user.username %></strong>
-				<%= link_to "Add friend", friendships_path(:friend_id => user), :method => :post %>
+				<% if user.id == current_user.id %>
+					<%= " you" %>
+				<% elsif (user.id != current_user.id) && (current_user.friendships.where(:friend_id => user.id).where(:user_id => current_user.id).empty?) %>
+					<%= link_to "Add friend", friendships_path(:friend_id => user), :method => :post %>
+				<% else %>
+					<u> already friend</u>
+				<% end %>
+
+				
 			</p>
 		</div>
 	<% end %>

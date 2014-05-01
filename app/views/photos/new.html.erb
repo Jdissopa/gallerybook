@@ -1,0 +1,24 @@
+<h1>New photo</h1>
+
+<!-- <%= render 'form' %> -->
+
+<div class="row">
+  <% @gallery.photos.each do |photo| %>
+    <div class="span4">
+      <div class="img">
+        <%= link_to image_tag(photo.picture.url, :width => 200), photo_path(photo) if photo.picture.url.present? %>
+      </div>
+
+      <div style="text-align:center;">
+        <h3><%= photo.name %></h3>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= form_for Photo.new do |f| %>
+	<%= f.label :picture, "Upload photos to gallery" %>
+	<%= f.file_field :picture, multiple: true, name: "photo[picture]" %>
+<% end %>
+
+<%= link_to 'Back', photos_path %>

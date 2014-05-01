@@ -1,0 +1,23 @@
+<%- model_class = Gallery -%>
+
+<div class="page-header">
+  <h5><u>All <%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></u></h5>
+</div>
+
+<div class="row">
+  <% @galleries.each do |gallery| %>
+    <div class="span4">
+      <div class="img" style="padding-bottom:0;"><%= link_to image_tag(gallery.photos.first.picture.url), gallery_path(gallery) if gallery.photos.first.picture.url.present? %>
+        <div class="number">
+          <div style="position:absolute;top:30%;left:30%;"><%= link_to gallery.photos.length, gallery_path(gallery) %>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:-30px;"><h4><%= link_to gallery.gallert_name, gallery_path(gallery) %></h4></div>
+      <div><%= link_to gallery.description, gallery_path(gallery) %></div>
+    </div><!-- .span4 -->
+  <% end %>
+</div><!-- .row -->
+
+  <br>

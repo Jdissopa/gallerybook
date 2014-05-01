@@ -1,0 +1,6 @@
+<% @comments.each do |comment| %>
+	<p><u><%= simple_format User.find(comment.user_id).username if comment.user_id %></u></p>
+	<p style="position:relative;left:50px;"><%= comment.content %></p>
+	<p style="position:relative;left:70px;"><%= comment.created_at.strftime("%d %b %y") %></p>
+	<hr width="20%">
+<% end %>

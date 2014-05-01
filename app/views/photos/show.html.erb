@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<div style="text-align:center;">
+	<p><strong><%= @photo.name %></strong></p>
+
+<p><%= image_tag(@photo.picture_url, :width => 300) if @photo.picture.present? %></p>
+<p><%= @photo.description %></p>
+<br>
+<h5>Comments</h5>
+</div>
+
+<div class="center">
+	<%= render "comments/comments" %>
+	<%= render "comments/form" %>
+</div>
+
+<br>
+
+<%= link_to 'Galleries', galleries_path %> |
+<%= link_to 'Edit', edit_photo_path(@photo) %> |
+<%= link_to 'Back', gallery_path(@photo.gallery_id) %>

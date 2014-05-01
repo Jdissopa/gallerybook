@@ -1,0 +1,60 @@
+<%- model_class = Gallery -%>
+<div class="page-header">
+  <div class="row">
+    <div class="span5">
+      <h1><%=t '.title', :default => @gallery.gallert_name %></h1>
+      <p><%= @gallery.description %></p>
+    </div>
+
+    <div class="span7 CommentNumber">
+      <div style="position:absolute;top:35%;left:30%;">
+        <p><%= @gallery.photos.length %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:gallert_name) %>:</strong></dt>
+  <dd><%= @gallery.gallert_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @gallery.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @gallery.user_id %></dd>
+</dl> -->
+
+<div class="row">
+  <% @gallery.photos.each do |photo| %>
+    <div class="span4">
+      <div class="img">
+        <%= link_to image_tag(photo.picture.url, :width => 200), photo_path(photo) if photo.picture.url.present? %>
+        <div class="bubble" style="bottom:50px;left:160px;">
+          <div style="position:absolute;top:30%;left:40%;font-size: 2.2em;">
+            <%= photo.comments.length %>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:-30px;margin-bottom:40px;">
+        <p><%= photo.name %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="CommentNumber addNew">
+  <div style="position:absolute;top:35%;left:25%;font-size: 2.2em;">
+    <%= link_to "+", new_photo_path(:id => @gallery.id) %>
+  </div>
+</div>
+
+<br>
+
+<div class="center">
+<%= content_tag :div, id: "comments", data: {url: gallery_comments_url(@gallery)} do %>
+  <h5><u>Comments</u></h5>
+  <%= render "comments/comments" %>
+<% end %>
+  <p>Add comment</p>
+  <%= render "comments/form" %>
+</div>
